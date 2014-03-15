@@ -1,13 +1,8 @@
 <?php
 /**
  * Elgg plugin to allow using the web cam to capture profile icons
- * 
- * @author  Lenny Urbanowski
- * @link	http://www.itslennysfault.com
- * @package photobooth
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
  *
- * Created for Gabriel Media Group (http://www.gabrielmediagroupinc.com
+ * Author Gerard Kanters/ Brett Profitt
  *
  * 	save.php - Called from the swf file to save the captured picture
  */
@@ -30,8 +25,8 @@ if ($jpg) {
 	$filename = $filehandler->getFilenameOnFilestore();
 	$filehandler->close();
 } else {
-	register_error(elgg_echo("photobooth:saveerror"));
-	forward(REFERRER);
+	register_error(elgg_echo("webcam:saveerror"));
+	forward('/activity');
 }
 
 

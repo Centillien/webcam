@@ -2,12 +2,8 @@
 /**
  * Elgg plugin to allow using the web cam to capture profile icons
  * 
- * @author  Lenny Urbanowski
- * @link	http://www.itslennysfault.com
- * @package photobooth
- * @license http://www.gnu.org/licenses/old-licenses/gpl-2.0.html GNU Public License version 2
- *
- * Created for Gabriel Media Group (http://www.gabrielmediagroupinc.com
+ * @author   Gerard Kanters/ Brett Profitt
+ * https://www.centillien.com
  *
  * 	en.php - English language variables
  */
