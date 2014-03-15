@@ -17,4 +17,3 @@
 <div>
         <?php echo elgg_view('profile/captureicon'); ?>
 </div>
-
