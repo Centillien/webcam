@@ -8,6 +8,8 @@
  */
 
 global $CONFIG;
+//Load engine
+require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/engine/start.php');
 
 $user = elgg_get_logged_in_user_entity();
 
