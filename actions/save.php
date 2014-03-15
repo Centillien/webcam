@@ -73,4 +73,4 @@ if ($small !== false && $medium !== false && $large !== false && $tiny !== false
 } else {
 	system_message(elgg_echo("profile:icon:notfound"));
 }
-forward(REFERRER);
+forward('/activity');
