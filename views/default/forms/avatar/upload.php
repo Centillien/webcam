@@ -15,5 +15,14 @@
 	<?php echo elgg_view('input/submit', array('value' => elgg_echo('upload'))); ?>
 </div>
 <div>
-        <?php echo elgg_view('profile/captureicon'); ?>
+        <?php 
+	$webcam_input = elgg_get_plugin_setting("webcam_input","webcam");
+        if($webcam_input == "flash") {
+		echo elgg_view('profile/captureicon'); 
+	}else{
+		echo elgg_view('profile/webcam'); 
+	}
+	?>
+
 </div>
+

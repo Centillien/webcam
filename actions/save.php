@@ -8,13 +8,17 @@
  */
 
 global $CONFIG;
-//Load engine
-require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/engine/start.php');
 
+//Load engine
+//require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/engine/start.php');
+
+// Get user guid
+$user_guid = (int)get_input('user_guid');
 $user = elgg_get_logged_in_user_entity();
 
 //Load data from flash object
 $jpg = file_get_contents('php://input');
+
 if ($jpg) {
 	$img = get_input('img');
 	

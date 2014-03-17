@@ -14,7 +14,8 @@ function webcam_init() {
 	$action_path = elgg_get_plugins_path() . 'webcam/actions';
 	elgg_register_action('webcam/save', "$action_path/save.php");
 
-//	elgg_extend_view("forms/profile/edit", "webcam/forms/profile/edit");
+	//elgg_extend_view('forms/avatar/upload', 'profile/webcam', 600);
+
 }
 
 /**
