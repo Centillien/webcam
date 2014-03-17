@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
 	<name>Webcam</name>
-	<author>Gerard Kanters</author>
-	<version>1.0</version>
+	<author>Brett Profitt (inspired by Gerard Kanters)</author>
+	<version>0.1</version>
 	<category>tools</category>
 	<description>
-		Use a webcam to take a picture as profile image
+		Adds webcam capture and entering URLs as options to change avatars.
 	</description>
-	<website>https://www.centillien.com</website>
-	<copyright>Copyright 2014 Centillien B.V</copyright>
+	<website>http://github.com/brettp</website>
+	<copyright>Copyright 2014 Brett Proiftt</copyright>
 	<license>GNU Public License version 2</license>
 	<requires>
 		<type>elgg_version</type>

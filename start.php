@@ -1,39 +1,21 @@
 <?php
+/**
+ * Uses HTML5 user media interface to get a picture for the avatar.
+ */
+
+elgg_register_event_handler('init', 'system', 'better_avatars_init');
 
 /**
- * Elgg plugin to allow using the web cam to capture profile icons
- * 
- * Author Gerard Kanters https://www.centillien.com
- * 
+ * Init
  */
-function webcam_init() {
-	// routing of urls
-	elgg_register_page_handler('webcam', 'webcam_page_handler');
-
+function better_avatars_init() {
 	//register actions
-	$action_path = elgg_get_plugins_path() . 'webcam/actions';
-	elgg_register_action('webcam/save', "$action_path/save.php");
+	$action_path = dirname(__FILE__)  . '/actions';
+	elgg_register_action('avatar/upload', "$action_path/avatar/upload.php");
 
-//	elgg_extend_view("forms/profile/edit", "webcam/forms/profile/edit");
-}
+	$url = elgg_get_simplecache_url('js', 'better_avatars');
+	elgg_register_simplecache_view('js/better_avatars');
+	elgg_register_js('better_avatars', $url);
 
-/**
- * Handle requests to /webcam/
- *
- * @param array $page Page segments
- * @return boolean
- */
-function webcam_page_handler($page) {
-	$base = elgg_get_plugins_path() . 'webcam/pages/';
-
-	if (!isset($page[0])) {
-		$page[0] = '?display=capture';
-	}
-
-	$page_type = $page[0];
-	switch ($page_type) {
-		default:
-			include $base . 'index.php';
-			break;
-	}
+	elgg_extend_view('css/elgg', 'css/better_avatars');
 }
