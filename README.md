@@ -1,9 +1,10 @@
-This plugin uses flash to take a picture with a webcam.
+This plugin provides better avatars using HTML5 or Flash webcam.
 
 Install instructions:
 
 - Drop the plugin in /mod
 - Activate
+- Select your preference to control the users webcam
 - Go to edit avatar
 - Allow the plugin to use your webcam. 
 
