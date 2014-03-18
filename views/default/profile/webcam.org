@@ -17,11 +17,16 @@ canvas {
   width: 260px;
   height: 200px;
   background: rgba(255,255,255,0.5);
+  border: 1px solid #ccc;
 }
 </style>
 
-<video id="video" autoplay controls loop></video>
-<canvas id="canvas" src="context.drawImage(video, 0, 0, 640, 480);"></canvas><br><br>
+<video id="video" autoplay controls loop>
+    <source src=video.webm type=video/webm>
+    <source src=video.ogg type=video/ogg>
+    <source src=video.mp4 type=video/mp4>
+</video>
+<canvas id="canvas" src="convertCanvasToImage()"></canvas><br><br>
 <button id="snap" class="elgg-button elgg-button-submit">Take Picture</button>
 
 
@@ -42,11 +47,13 @@ window.addEventListener("DOMContentLoaded", function() {
 		navigator.getUserMedia(videoObj, function(stream) {
 			video.src = stream;
 			video.play();
+			context.drawImage(video, 0, 0, 640, 480);
 		}, errBack);
 	} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
 		navigator.webkitGetUserMedia(videoObj, function(stream){
 			video.src = window.webkitURL.createObjectURL(stream);
 			video.play();
+ 			context.drawImage(video, 0, 0, 640, 480);
 
 		}, errBack);
 	}
@@ -54,15 +61,21 @@ window.addEventListener("DOMContentLoaded", function() {
 		navigator.mozGetUserMedia(videoObj, function(stream){
 			video.src = window.URL.createObjectURL(stream);
 			video.play();
+			context.drawImage(video, 0, 0, 640, 480);
 		}, errBack);
 	}
 }, false);
 
 // Trigger photo take
 document.getElementById("snap").addEventListener("click", function() {
-        var image = new Image();
-        image.src = canvas.toDataURL("image/png");
-	$.post( "mod/webcam/actions/save.php");
+	context.drawImage((video, 0, 0, 640, 480), this);
 });
+
+// Converts canvas to an image
+function convertCanvasToImage(canvas) {
+	var image = new Image();
+	image.src = canvas.toDataURL("image/png");
+	return image;
+}
 
 </script>

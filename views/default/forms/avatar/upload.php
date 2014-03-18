@@ -4,25 +4,68 @@
  * 
  * @uses $vars['entity']
  */
+$webcam_input = elgg_get_plugin_setting("webcam_input","webcam");
+if($webcam_input == "html5") {
+	elgg_load_js('webcam');
+}
+
+$selected_tab = get_input('tab', 'acquire');
+
+$options = array(
+	'tabs' => array(),
+	'class' => 'avatar-tabs'
+);
+$tabs = array('aquire', 'upload', 'url');
+
+foreach ($tabs as $tab) {
+	$options['tabs'][] = array(
+		'text' => elgg_echo("webcam:tab:$tab"),
+		'id' => "avatar-$tab-tab",
+		'selected' => $selected_tab == $tab,
+		'href' => '#'
+	);
+}
+
+$tab_nav = elgg_view('navigation/tabs', $options);
+
+echo $tab_nav;
+
 
 ?>
-<div>
-	<label><?php echo elgg_echo("avatar:upload"); ?></label><br />
-	<?php echo elgg_view("input/file",array('name' => 'avatar')); ?>
+
+<div id="avatar-options">
+	<div id="avatar-upload" class="hidden">
+		<label><?php echo elgg_echo("avatar:upload"); ?></label><br />
+		<?php echo elgg_view("input/file", array('name' => 'avatar')); ?>
+	</div>
+
+	<div id="avatar-aquire">
+	<label><?php echo elgg_echo("webcam:aquire:info"); ?></label><br />
+        <?php
+        if($webcam_input == "flash") {
+                echo elgg_view('profile/captureicon');
+        }else{
+		?>
+                <div>
+                        <canvas id="webcam-canvas" class="hidden"></canvas>
+                        <video id="webcam-video"></video>
+                </div>
+		<?php
+        }
+        ?>
+        </div>
+
+	<div id="avatar-url" class="hidden">
+		<label><?php echo elgg_echo("webcam:url:info"); ?></label><br />
+		<?php echo elgg_view("input/text", array('name' => 'avatar_url')); ?>
+	</div>
 </div>
+
+
 <div class="elgg-foot">
 	<?php echo elgg_view('input/hidden', array('name' => 'guid', 'value' => $vars['entity']->guid)); ?>
-	<?php echo elgg_view('input/submit', array('value' => elgg_echo('upload'))); ?>
+	<?php echo elgg_view('input/submit', array(
+		'value' => elgg_echo('upload'),
+		'id' => 'avatar-upload'
+	)); ?>
 </div>
-<div>
-        <?php 
-	$webcam_input = elgg_get_plugin_setting("webcam_input","webcam");
-        if($webcam_input == "flash") {
-		echo elgg_view('profile/captureicon'); 
-	}else{
-		echo elgg_view('profile/webcam'); 
-	}
-	?>
-
-</div>
-

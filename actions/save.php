@@ -10,7 +10,7 @@
 global $CONFIG;
 
 //Load engine
-//require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/engine/start.php');
+require_once(dirname(dirname(dirname(dirname(__FILE__)))) . '/engine/start.php');
 
 // Get user guid
 $user_guid = (int)get_input('user_guid');
