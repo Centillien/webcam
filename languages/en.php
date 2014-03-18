@@ -12,6 +12,7 @@ $english = array(
 	'better_avatars:url:info' => 'Enter the URL of an image',
 
 	'better_avatars:webcam_error' => "Could not read the webcam.",
+	'better_avatars:no_avatar_selected' => "You must take a picture with your webcam, upload a file, or enter a URL.",
 );
 
 add_translation("en", $english);

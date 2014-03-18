@@ -5,22 +5,22 @@
 }
 
 #webcam-video.has-photo {
-	animation: pulsate 0.5s ease-out;
-	-webkit-animation: pulsate 0.5s ease-out;
-	-moz-animation: pulsate 0.5s ease-out;
+	animation: snap 0.15s ease-out;
+	-webkit-animation: snap 0.15s ease-out;
+	-moz-animation: snap 0.15s ease-out;
 }
 
-@-webkit-keyframes pulsate {
+@-webkit-keyframes snap {
     0% {-webkit-transform: scale(0.1, 0.1); opacity: 0.0;}
-    100% {opacity: 1.0;}
+	100% {-webkit-transform: scale(1, 1); opacity: 1;}
 }
 
-@-moz-keyframes pulsate {
+@-moz-keyframes snap {
     0% {-moz-transform: scale(0.1, 0.1); opacity: 0.0;}
-    100% {opacity: 1.0;}
+	100% {-moz-transform: scale(1, 1); opacity: 1;}
 }
 
-@keyframes pulsate {
+@keyframes snap {
     0% {transform: scale(0.1, 0.1); opacity: 0.0;}
-    100% {opacity: 1.0;}
+	100% {transform: scale(1, 1); opacity: 1;}
 }

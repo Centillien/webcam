@@ -25,7 +25,7 @@ elgg.avatar.getMedia = (
 
 elgg.avatar.init = function() {
 	$('.avatar-tabs a').live('click', elgg.avatar.changeTab);
-//	$('.elgg-form-avatar-upload').live('submit', elgg.avatar.submit);
+	$('.elgg-form-avatar-upload').live('submit', elgg.avatar.submit);
 
 	$('#webcam-video').bind('canplay', elgg.avatar.setStream);
 	$('#webcam-video').live('click', elgg.avatar.capturePicture);
@@ -124,7 +124,17 @@ elgg.avatar.changeTab = function(ev) {
 	// change content
 	$("#avatar-options > div").hide();
 	$('#' + $li.attr('id').replace('-tab', '')).show();
+};
 
+elgg.avatar.submit = function(ev) {
+	// prevent if no data at all
+	if (!$('#webcam-image-base64').val()
+		&& !$('input[name=avatar]').val()
+		&& !$('input[name=avatar_url]').val()
+	) {
+		elgg.register_error(elgg.echo('better_avatars:no_avatar_selected'));
+		ev.preventDefault();
+	}
 };
 
 elgg.register_hook_handler('init', 'system', elgg.avatar.init);

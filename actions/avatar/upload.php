@@ -14,13 +14,12 @@ if (!$owner || !($owner instanceof ElggUser) || !$owner->canEdit()) {
 }
 
 // check for html5, and finally file upload
-$is_file = false;
 $img_data = false;
 $html5 = get_input('webcam-image-base64');
 $url = get_input('avatar_url');
-if ($html5) {
-	$is_file = false;
+$upload = isset($_FILES['avatar']['name']) && !empty($_FILES['avatar']['name']);
 
+if ($html5) {
 	// the data url format is data:<mime_type>;base64,<data>
 	list($info, $base64) = explode(',', $html5);
 	$img_data = base64_decode($base64);
@@ -46,13 +45,16 @@ if ($html5) {
 
 		if (!$img_data) {
 			register_error(elgg_echo('avatar:upload:fail'));
+			forward(REFERRER);
 		}
 	}
-} elseif ($_FILES['avatar']['error'] != 0) {
-	$is_file = true;
-	register_error(elgg_echo('avatar:upload:fail'));
-	forward(REFERER);
+} elseif ($upload) {
+	if ($_FILES['avatar']['error'] !== 0) {
+		register_error(elgg_echo('avatar:upload:fail'));
+		forward(REFERER);
+	}
 } else {
+	// nothing was submitted
 	register_error(elgg_echo('avatar:upload:fail'));
 	forward(REFERER);
 }
@@ -77,7 +79,7 @@ $icon_sizes = elgg_get_config('icon_sizes');
 // so we can do clean up if one fails.
 $files = array();
 foreach ($icon_sizes as $name => $size_info) {
-	if ($is_file) {
+	if ($upload) {
 		$resized = get_resized_image_from_uploaded_file('avatar', $size_info['w'], $size_info['h'], $size_info['square'], $size_info['upscale']);
 	} else {
 		$resized = get_resized_image_from_existing_file(
