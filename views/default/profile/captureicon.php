@@ -4,7 +4,7 @@
  */
 ?>
 <div id="flashContent">
-	<object type="application/x-shockwave-flash" data="<?php echo elgg_get_site_url(); ?>mod/webcam/swf/take_picture.swf" width="700" height="350" id="take_picture" style="float: left; vertical-align:top;">
+	<object type="application/x-shockwave-flash" data="<?php echo elgg_get_site_url(); ?>mod/webcam/haxe/take_picture.swf" width="700" height="350" style="float: left; vertical-align:top;">
 		<param name="movie" value="take_picture.swf" />
 		<param name="quality" value="high" />
 		<param name="bgcolor" value="#ffffff" />

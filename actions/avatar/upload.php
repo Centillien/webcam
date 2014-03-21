@@ -20,9 +20,7 @@ $url = get_input('avatar_url');
 $upload = isset($_FILES['avatar']['name']) && !empty($_FILES['avatar']['name']);
 
 if ($html5) {
-	// the data url format is data:<mime_type>;base64,<data>
-	list($info, $base64) = explode(',', $html5);
-	$img_data = base64_decode($base64);
+	$img_data = base64_decode($html5);
 	
 	if (!$img_data){
 		register_error(elgg_echo("avatar:upload:fail"));

@@ -94,7 +94,7 @@ elgg.avatar.capturePicture = function(ev) {
 	if (video.paused) {
 		video.play();
 		$(video).removeClass('has-photo');
-		$('#webcam-image-base64').remove();
+		elgg.avatar.removeBase64Input();
 		return;
 	}
 	
@@ -104,12 +104,21 @@ elgg.avatar.capturePicture = function(ev) {
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
 
-	var data = canvas.toDataURL();
+    // the data url format is data:<mime_type>;base64,<data>
+	var data = canvas.toDataURL().split(',')[1]
+	elgg.avatar.saveBase64Input(data, $(this).closest('form'));
+};
 
+elgg.avatar.saveBase64Input = function(data, formElement) {
+	console.log("Saving to " + formElement);
 	var html = "<input id='webcam-image-base64' type='hidden' name='webcam-image-base64'>";
-	$(this).prepend(html);
+	$(formElement).prepend(html);
 	$('#webcam-image-base64').attr('value', data);
 };
+
+elgg.avatar.removeBase64Input = function() {
+	$('#webcam-image-base64').remove();
+}
 
 elgg.avatar.changeTab = function(ev) {
 	ev.preventDefault();
