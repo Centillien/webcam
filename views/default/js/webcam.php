@@ -27,7 +27,7 @@ elgg.avatar.init = function() {
 	$('.avatar-tabs a').live('click', elgg.avatar.changeTab);
 	$('.elgg-form-avatar-upload').live('submit', elgg.avatar.submit);
 
-	if (!elgg.avatar.getMedia) {
+	if (elgg.avatar.getMedia) {
 		elgg.avatar.initHtml5();
 	} else if (elgg.avatar.hasFlash()) {
 		elgg.avatar.initFlash();
