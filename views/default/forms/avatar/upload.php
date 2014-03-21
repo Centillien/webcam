@@ -5,9 +5,7 @@
  * @uses $vars['entity']
  */
 $webcam_input = elgg_get_plugin_setting("webcam_input", "webcam");
-if ($webcam_input == "html5") {
-	elgg_load_js('webcam');
-}
+elgg_load_js('webcam');
 
 $selected_tab = get_input('tab', 'acquire');
 

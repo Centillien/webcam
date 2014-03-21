@@ -1,9 +1,5 @@
 <?php
 /**
- * Elgg plugin to allow using the web cam to capture profile icons
- *
- * Author Gerard Kanters/ Brett Profitt
- *
  * 	save.php - Called from the swf file to save the captured picture
  */
 

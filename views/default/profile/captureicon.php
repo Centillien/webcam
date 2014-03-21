@@ -1,10 +1,7 @@
 <?php
 /**
- * Elgg plugin to allow using the web cam to capture profile icons
- * 
  * 	captureicon.php - View for the Capture icon swf
  */
-
 ?>
 <div id="flashContent">
 	<object type="application/x-shockwave-flash" data="<?php echo elgg_get_site_url(); ?>mod/webcam/swf/take_picture.swf" width="700" height="350" id="take_picture" style="float: left; vertical-align:top;">

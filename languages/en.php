@@ -1,10 +1,5 @@
 <?php
 /**
- * Elgg plugin to allow using the web cam to capture profile icons
- * 
- * @author   Gerard Kanters/ Brett Profitt
- * https://www.centillien.com
- *
  * 	en.php - English language variables
  */
 $english = array(
