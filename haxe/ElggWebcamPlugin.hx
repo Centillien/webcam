@@ -28,11 +28,14 @@ class Webcam {
 	var cam:Camera = Camera.getCamera();
 	var vidContainer:MovieClip;
 	var hasSnap:Bool = false;
+	var videoWidth = Lib.current.stage.stageWidth;
+	var videoHeight = Lib.current.stage.stageHeight;
 
 	public function new() {
 		if (cam != null) {
-			// set sizes
 			cam.addEventListener(StatusEvent.STATUS, camInit);
+			cam.setMode(320, 240, 30);
+			cam.setQuality(0, 100);
 
 			mc = Lib.current;
 			vid = new Video(cam.width, cam.height);
@@ -41,6 +44,9 @@ class Webcam {
 			// have to have a container to attach a click event.
 			vidContainer = new MovieClip();
 			vidContainer.addChild(vid);
+			vidContainer.width = videoWidth;
+			vidContainer.height = videoHeight;
+
 			mc.addChild(vidContainer);
 
 			// pause / unpause on click
@@ -52,6 +58,8 @@ class Webcam {
 					// place over playing video
 					bitmap.x = 0;
 					bitmap.y = 0;
+					bitmap.width = videoWidth;
+					bitmap.height = videoHeight;
 					bitmap.name = "snap";
 
 					mc.addChild(bitmap);
@@ -85,13 +93,12 @@ class Webcam {
 			mc = Lib.current;
 			mc.addChild(text);
 		} else {
-			cam.setMode(320, 240, 30);
-			cam.setQuality(0, 100);
+			// @todo this doens't work.
+			// cam.setMode(320, 240, 30);
+			// cam.setQuality(0, 100);
 		}
-	}
 
-	public function displaySnap() {
-		trace("Snapping");
+		cam.removeEventListener(StatusEvent.STATUS, camInit);
 	}
 }
 

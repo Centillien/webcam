@@ -27,12 +27,32 @@ elgg.avatar.init = function() {
 	$('.avatar-tabs a').live('click', elgg.avatar.changeTab);
 	$('.elgg-form-avatar-upload').live('submit', elgg.avatar.submit);
 
-	if (elgg.avatar.getMedia) {
+	if (!elgg.avatar.getMedia) {
 		elgg.avatar.initHtml5();
-	} else {
+	} else if (elgg.avatar.hasFlash()) {
 		elgg.avatar.initFlash();
+	} else {
+		$('#avatar-upload-tab > a').click();
+		$('#avatar-acquire-tab').hide();
 	}
 };
+
+elgg.avatar.hasFlash = function() {
+	try {
+		var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+		if (fo) {
+			return true;
+		}
+	} catch (e) {
+		if (navigator.mimeTypes
+			&& navigator.mimeTypes['application/x-shockwave-flash'] != undefined
+			&& navigator.mimeTypes['application/x-shockwave-flash'].enabledPlugin) {
+			return true;
+		}
+	}
+
+	return false;
+}
 
 elgg.avatar.initHtml5 = function() {
 	$('#webcam-video').live('click', elgg.avatar.capturePicture);
@@ -65,7 +85,9 @@ elgg.avatar.initHtml5 = function() {
 
 elgg.avatar.initFlash = function() {
 	var html = '<div id="flashContent">'
-		+ '<object type="application/x-shockwave-flash" data="' + elgg.get_site_url() + 'mod/webcam/haxe/take_picture.swf" width="700" height="350" style="float: left; vertical-align:top;">'
+		+ '<object type="application/x-shockwave-flash" data="' + elgg.get_site_url() 
+			// @todo make these dynamic
+			+ 'mod/webcam/haxe/take_picture.swf" width="480" height="360">'
 		+ '<param name="movie" value="take_picture.swf" />'
 		+ '<param name="quality" value="high" />'
 		+ '<param name="bgcolor" value="#ffffff" />'
