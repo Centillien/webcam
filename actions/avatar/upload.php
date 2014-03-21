@@ -53,7 +53,7 @@ if ($html5) {
 	}
 } else {
 	// nothing was submitted
-	register_error(elgg_echo('avatar:upload:fail'));
+	register_error(elgg_echo('webcam:no_avatar_selected'));
 	forward(REFERER);
 }
 

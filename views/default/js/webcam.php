@@ -27,7 +27,7 @@ elgg.avatar.init = function() {
 	$('.avatar-tabs a').live('click', elgg.avatar.changeTab);
 	$('.elgg-form-avatar-upload').live('submit', elgg.avatar.submit);
 
-	if (elgg.avatar.getMedia) {
+	if (!elgg.avatar.getMedia) {
 		elgg.avatar.initHtml5();
 	} else if (elgg.avatar.hasFlash()) {
 		elgg.avatar.initFlash();
@@ -82,6 +82,17 @@ elgg.avatar.initHtml5 = function() {
 		}
 	);
 };
+
+elgg.avatar.shutterSound = function() {
+	var audio = document.createElement('audio');
+	audio.src = elgg.get_site_url() + 'mod/webcam/haxe/shutter.mp3';
+
+	return {
+		play: function() {
+			audio.play();
+		}
+	};
+}
 
 elgg.avatar.initFlash = function() {
 	var html = '<div id="flashContent">'
@@ -153,6 +164,7 @@ elgg.avatar.capturePicture = function(ev) {
 	var width = elgg.avatar.options.width,
 		height = elgg.avatar.options.height;
 	
+	elgg.avatar.shutterSound().play();
 	video.pause();
 	$(video).addClass('has-photo');
 	canvas.width = width;

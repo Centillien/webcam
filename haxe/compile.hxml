@@ -1,3 +1,4 @@
 -main ElggWebcamPlugin
 -swf-version 11.3
 -swf take_picture.swf
+-lib feffects

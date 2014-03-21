@@ -9,3 +9,7 @@ Install instructions:
 - Allow the plugin to use your webcam. 
 
 Remark: The browser requests to allow use of the webcam.
+
+The SWF object is created by [Haxe](http://haxe.org).
+To compile, install Haxe and then install the 
+[feffects lib](http://haxe.org/com/libs/feffects).
