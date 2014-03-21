@@ -4,7 +4,6 @@
  * 
  * @uses $vars['entity']
  */
-$webcam_input = elgg_get_plugin_setting("webcam_input", "webcam");
 elgg_load_js('webcam');
 
 $selected_tab = get_input('tab', 'acquire');
@@ -37,18 +36,10 @@ echo $tab_nav;
 
 	<div id="avatar-acquire">
 		<label><?php echo elgg_echo("webcam:acquire:info"); ?></label><br />
-		<?php
-		if ($webcam_input == "flash") {
-			echo elgg_view('profile/captureicon');
-		} else {
-			?>
-			<div>
-				<canvas id="webcam-canvas" class="hidden"></canvas>
-				<video id="webcam-video"></video>
-			</div>
-			<?php
-		}
-		?>
+		<div id="webcam">
+			<canvas id="webcam-canvas" class="hidden"></canvas>
+			<video id="webcam-video"></video>
+		</div>
 	</div>
 
 	<div id="avatar-url" class="hidden">
