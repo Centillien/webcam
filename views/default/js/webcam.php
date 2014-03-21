@@ -27,7 +27,34 @@ elgg.avatar.init = function() {
 	$('.avatar-tabs a').live('click', elgg.avatar.changeTab);
 	$('.elgg-form-avatar-upload').live('submit', elgg.avatar.submit);
 
-	$('#webcam-video').bind('canplay', elgg.avatar.setStream);
+	if (elgg.avatar.getMedia) {
+		elgg.avatar.initHtml5();
+	} else if (elgg.avatar.hasFlash()) {
+		elgg.avatar.initFlash();
+	} else {
+		$('#avatar-upload-tab > a').click();
+		$('#avatar-acquire-tab').hide();
+	}
+};
+
+elgg.avatar.hasFlash = function() {
+	try {
+		var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+		if (fo) {
+			return true;
+		}
+	} catch (e) {
+		if (navigator.mimeTypes
+			&& navigator.mimeTypes['application/x-shockwave-flash'] != undefined
+			&& navigator.mimeTypes['application/x-shockwave-flash'].enabledPlugin) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+elgg.avatar.initHtml5 = function() {
 	$('#webcam-video').live('click', elgg.avatar.capturePicture);
 
 	// must be called in the context of navigator or window, depending on browser
@@ -56,24 +83,48 @@ elgg.avatar.init = function() {
 	);
 };
 
+elgg.avatar.initFlash = function() {
+	var html = '<div id="flashContent">'
+		+ '<object type="application/x-shockwave-flash" data="' + elgg.get_site_url() 
+			// @todo make these dynamic
+			+ 'mod/webcam/haxe/take_picture.swf" width="480" height="360">'
+		+ '<param name="movie" value="take_picture.swf" />'
+		+ '<param name="quality" value="high" />'
+		+ '<param name="bgcolor" value="#ffffff" />'
+		+ '<param name="play" value="true" />'
+		+ '<param name="loop" value="true" />'
+		+ '<param name="wmode" value="transparent" />'
+		+ '<param name="scale" value="noscale" />'
+		+ '<param name="menu" value="true" />'
+		+ '<param name="devicefont" value="false" />'
+		+ '<param name="salign" value="" />'
+		+ '<param name="allowScriptAccess" value="sameDomain" />'
+		+ '<a href="http://www.adobe.com/go/getflash">'
+		+ '	<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />'
+		+ '</a>'
+		+ '</object>'
+		+ '</div>';
+
+	$('#webcam').html(html);
+};
+
 /**
  * Normalize resolutions
  */
-elgg.avatar.setStream = function(ev) {
-	var $this = $(this);
-	$streaming = $this.data('streaming');
-	if (!$streaming) {
-		// normalize the resolutions
-		var canvas = $('#webcam-canvas');
+elgg.avatar.setRes = function(ev) {
+	var $video = $('video');
+	video = $video.get(0);
 
-		elgg.avatar.options.height = this.videoHeight / (this.videoWidth / elgg.avatar.options.width);
-		$this.attr('width', elgg.avatar.options.width);
-		$this.attr('height', elgg.avatar.options.height);
-		canvas.attr('width', elgg.avatar.options.width);
-		canvas.attr('height', elgg.avatar.options.height);
-		
-		$this.data('streaming', true);
-	}
+	// normalize the resolutions
+	var canvas = $('#webcam-canvas');
+
+	elgg.avatar.options.height = video.videoHeight / (video.videoWidth / elgg.avatar.options.width);
+	$video.attr('width', elgg.avatar.options.width);
+	$video.attr('height', elgg.avatar.options.height);
+	canvas.attr('width', elgg.avatar.options.width);
+	canvas.attr('height', elgg.avatar.options.height);
+
+	$video.data('streaming', true);
 };
 
 /**
@@ -86,17 +137,21 @@ elgg.avatar.capturePicture = function(ev) {
 	ev.preventDefault();
 
 	var canvas = $('#webcam-canvas').get(0),
-		video = this,
-		width = elgg.avatar.options.width,
-		height = elgg.avatar.options.height;
+		video = this;
 
 	// if clicked on while paused, unpause
 	if (video.paused) {
 		video.play();
 		$(video).removeClass('has-photo');
-		$('#webcam-image-base64').remove();
+		elgg.avatar.removeBase64Input();
 		return;
 	}
+
+	// @todo just make this return the resolution
+	elgg.avatar.setRes();
+
+	var width = elgg.avatar.options.width,
+		height = elgg.avatar.options.height;
 	
 	video.pause();
 	$(video).addClass('has-photo');
@@ -104,12 +159,20 @@ elgg.avatar.capturePicture = function(ev) {
     canvas.height = height;
     canvas.getContext('2d').drawImage(video, 0, 0, width, height);
 
-	var data = canvas.toDataURL();
+    // the data url format is data:<mime_type>;base64,<data>
+	var data = canvas.toDataURL().split(',')[1];
+	elgg.avatar.saveBase64Input(data, $(this).closest('form'));
+};
 
+elgg.avatar.saveBase64Input = function(data, formElement) {
 	var html = "<input id='webcam-image-base64' type='hidden' name='webcam-image-base64'>";
-	$(this).prepend(html);
+	$(formElement).prepend(html);
 	$('#webcam-image-base64').attr('value', data);
 };
+
+elgg.avatar.removeBase64Input = function() {
+	$('#webcam-image-base64').remove();
+}
 
 elgg.avatar.changeTab = function(ev) {
 	ev.preventDefault();
