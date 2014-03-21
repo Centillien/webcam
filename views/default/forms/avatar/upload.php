@@ -4,8 +4,8 @@
  * 
  * @uses $vars['entity']
  */
-$webcam_input = elgg_get_plugin_setting("webcam_input","webcam");
-if($webcam_input == "html5") {
+$webcam_input = elgg_get_plugin_setting("webcam_input", "webcam");
+if ($webcam_input == "html5") {
 	elgg_load_js('webcam');
 }
 
@@ -15,7 +15,7 @@ $options = array(
 	'tabs' => array(),
 	'class' => 'avatar-tabs'
 );
-$tabs = array('aquire', 'upload', 'url');
+$tabs = array('acquire', 'upload', 'url');
 
 foreach ($tabs as $tab) {
 	$options['tabs'][] = array(
@@ -29,8 +29,6 @@ foreach ($tabs as $tab) {
 $tab_nav = elgg_view('navigation/tabs', $options);
 
 echo $tab_nav;
-
-
 ?>
 
 <div id="avatar-options">
@@ -39,21 +37,21 @@ echo $tab_nav;
 		<?php echo elgg_view("input/file", array('name' => 'avatar')); ?>
 	</div>
 
-	<div id="avatar-aquire">
-	<label><?php echo elgg_echo("webcam:aquire:info"); ?></label><br />
-        <?php
-        if($webcam_input == "flash") {
-                echo elgg_view('profile/captureicon');
-        }else{
-		?>
-                <div>
-                        <canvas id="webcam-canvas" class="hidden"></canvas>
-                        <video id="webcam-video"></video>
-                </div>
+	<div id="avatar-acquire">
+		<label><?php echo elgg_echo("webcam:acquire:info"); ?></label><br />
 		<?php
-        }
-        ?>
-        </div>
+		if ($webcam_input == "flash") {
+			echo elgg_view('profile/captureicon');
+		} else {
+			?>
+			<div>
+				<canvas id="webcam-canvas" class="hidden"></canvas>
+				<video id="webcam-video"></video>
+			</div>
+			<?php
+		}
+		?>
+	</div>
 
 	<div id="avatar-url" class="hidden">
 		<label><?php echo elgg_echo("webcam:url:info"); ?></label><br />
@@ -63,9 +61,11 @@ echo $tab_nav;
 
 
 <div class="elgg-foot">
-	<?php echo elgg_view('input/hidden', array('name' => 'guid', 'value' => $vars['entity']->guid)); ?>
-	<?php echo elgg_view('input/submit', array(
+<?php
+	echo elgg_view('input/hidden', array('name' => 'guid', 'value' => $vars['entity']->guid));
+	echo elgg_view('input/submit', array(
 		'value' => elgg_echo('upload'),
 		'id' => 'avatar-upload'
-	)); ?>
+	));
+?>
 </div>

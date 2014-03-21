@@ -5,10 +5,10 @@
 	<version>1.02</version>
 	<category>tools</category>
 	<description>
-		Use a webcam to take a picture as profile image
+		Adds webcam capture and entering URLs as options to change avatars.
 	</description>
 	<website>https://www.centillien.com</website>
-	<copyright>Copyright 2014 Centillien B.V</copyright>
+	<copyright>Copyright 2014 Centillien B.V and Brett Profitt</copyright>
 	<license>GNU Public License version 2</license>
 	<requires>
 		<type>elgg_version</type>
