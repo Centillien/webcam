@@ -96,7 +96,7 @@ elgg.avatar.shutterSound = function() {
 
 elgg.avatar.initFlash = function() {
 	var html = '<div id="flashContent">'
-		+ '<object type="application/x-shockwave-flash" data="' + elgg.get_site_url() 
+		+ '<object id="webcam-flash-acquire" type="application/x-shockwave-flash" data="' + elgg.get_site_url() 
 			// @todo make these dynamic
 			+ 'mod/webcam/haxe/take_picture.swf" width="480" height="360">'
 		+ '<param name="movie" value="take_picture.swf" />'
@@ -109,7 +109,7 @@ elgg.avatar.initFlash = function() {
 		+ '<param name="menu" value="true" />'
 		+ '<param name="devicefont" value="false" />'
 		+ '<param name="salign" value="" />'
-		+ '<param name="allowScriptAccess" value="sameDomain" />'
+		+ '<param name="allowScriptAccess" value="always" />'
 		+ '<a href="http://www.adobe.com/go/getflash">'
 		+ '	<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />'
 		+ '</a>'
@@ -210,6 +210,8 @@ elgg.avatar.submit = function(ev) {
 		elgg.register_error(elgg.echo('better_avatars:no_avatar_selected'));
 		ev.preventDefault();
 	}
+
+	return true;
 };
 
 elgg.register_hook_handler('init', 'system', elgg.avatar.init);
