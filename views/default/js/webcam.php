@@ -78,7 +78,7 @@ elgg.avatar.initHtml5 = function() {
 		},
 
 		function(err) {
-			elgg.register_error(elgg.echo('webcam_avatars:webcam_error'));
+			elgg.register_error(elgg.echo('webcam:webcam_error'));
 		}
 	);
 };
@@ -207,7 +207,7 @@ elgg.avatar.submit = function(ev) {
 		&& !$('input[name=avatar]').val()
 		&& !$('input[name=avatar_url]').val()
 	) {
-		elgg.register_error(elgg.echo('webcam_avatars:no_avatar_selected'));
+		elgg.register_error(elgg.echo('webcam:no_avatar_selected'));
 		ev.preventDefault();
 	}
 
