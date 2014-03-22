@@ -19,6 +19,7 @@ $english = array(
 
 	'webcam:webcam_error' => "Could not read the webcam.",
 	'webcam:no_avatar_selected' => "You must take a picture with your webcam, upload a file, or enter a URL.",
+	'webcam:no_image_selected' => "You must select a picture, before trying to upload",
 
 	'webcam:upload' => "Upload Image",
 	'webcam:capture' => "Or use your Webcam",
