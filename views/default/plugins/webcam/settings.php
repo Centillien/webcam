@@ -3,8 +3,8 @@
  * Plugin settings
  */
 $input_options = array(
-	"html5" => elgg_echo("html5"),
-	"flash" => elgg_echo("flash")
+	"html5" => "html5",
+	"flash" => "flash"
 );
 
 
