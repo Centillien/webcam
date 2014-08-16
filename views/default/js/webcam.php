@@ -1,8 +1,4 @@
 <?php
-/**
- * @todo: Remove inline HTML canvas and video objects
- * @todo: Clean up shutter sound
- */
 if (false) {
 	?><script><?php
 }
@@ -10,11 +6,6 @@ if (false) {
 
 elgg.provide('elgg.avatar');
 
-/**
- * Webcam size options
- *
- * @type Array
- */
 elgg.avatar.options = {
 	width: 480,
 	height: 0
@@ -32,10 +23,6 @@ elgg.avatar.getMedia = (
 	navigator.msGetUserMedia
 );
 
-/**
- * Init
- * @returns {Void}
- */
 elgg.avatar.init = function() {
 	$('.avatar-tabs a').live('click', elgg.avatar.changeTab);
 	$('.elgg-form-avatar-upload').live('submit', elgg.avatar.submit);
@@ -50,11 +37,6 @@ elgg.avatar.init = function() {
 	}
 };
 
-/**
- * Does the browser support flash?
- *
- * @returns {Boolean}
- */
 elgg.avatar.hasFlash = function() {
 	try {
 		var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
@@ -63,29 +45,26 @@ elgg.avatar.hasFlash = function() {
 		}
 	} catch (e) {
 		if (navigator.mimeTypes
-			&& navigator.mimeTypes['application/x-shockwave-flash'] !== undefined
+			&& navigator.mimeTypes['application/x-shockwave-flash'] != undefined
 			&& navigator.mimeTypes['application/x-shockwave-flash'].enabledPlugin) {
 			return true;
 		}
 	}
 
 	return false;
-};
+}
 
-/**
- * Init for HTML5 video
- *
- * @returns {Void}
- */
 elgg.avatar.initHtml5 = function() {
+	$('#webcam-video').live('click', elgg.avatar.capturePicture);
+
 	// must be called in the context of navigator or window, depending on browser
 	elgg.avatar.getMedia.call(navigator || window,
 		{
-			video: true
+			video: true,
+			audio: false
 		},
 
 		function(stream) {
-			$('#webcam-video').live('click', elgg.avatar.capturePicture);
 			var video = $('#webcam-video').get(0);
 
 			if (navigator.mozGetUserMedia) {
@@ -98,47 +77,12 @@ elgg.avatar.initHtml5 = function() {
 			video.play();
 		},
 
-		// what gets stuffed in this function is nowhere near standardized.
 		function(err) {
-			var error = err.name || err;
-			switch(error) {
-				// user denied permission
-				case 'PERMISSION_DENIED':
-				case 'PermissionDeniedError':
-					elgg.avatar.noWebcam(elgg.echo('webcam:no_access'));
-					break;
-
-				// browser doesn't support video from webcam
-				case 'NOT_SUPPORTED_ERROR':
-				case 'NotSupportedError':
-				case 'NO_DEVICES_FOUND':
-				case 'MANDATORY_UNSATISFIED_ERROR':
-				case 'MandatoryUnsatisfiedError':
-					elgg.avatar.noWebcam(elgg.echo('webcam:unavailable'));
-					break;
-			}
+			elgg.register_error(elgg.echo('webcam:webcam_error'));
 		}
 	);
 };
 
-/**
- * Show and error that there's not webcam.
- *
- * @returns {Void}
- */
-elgg.avatar.noWebcam = function(msg) {
-	var w = $('#webcam > video').width();
-	var h = $('#webcam > video').height();
-	var border = $('#webcam > video').css('border');
-
-	$('#webcam').html('<p class="pal">' + msg + '</p>')
-			.width(w).height(h)
-			.css('border', border);
-};
-
-/**
- * Play a shutter sound.
- */
 elgg.avatar.shutterSound = function() {
 	var audio = document.createElement('audio');
 	audio.src = elgg.get_site_url() + 'mod/webcam/haxe/shutter.mp3';
@@ -148,16 +92,11 @@ elgg.avatar.shutterSound = function() {
 			audio.play();
 		}
 	};
-};
+}
 
-/**
- * Init Flash
- *
- * @returns {Void}
- */
 elgg.avatar.initFlash = function() {
 	var html = '<div id="flashContent">'
-		+ '<object id="webcam-flash-acquire" type="application/x-shockwave-flash" data="' + elgg.get_site_url() 
+		+ '<object type="application/x-shockwave-flash" data="' + elgg.get_site_url() 
 			// @todo make these dynamic
 			+ 'mod/webcam/haxe/take_picture.swf" width="480" height="360">'
 		+ '<param name="movie" value="take_picture.swf" />'
@@ -170,7 +109,7 @@ elgg.avatar.initFlash = function() {
 		+ '<param name="menu" value="true" />'
 		+ '<param name="devicefont" value="false" />'
 		+ '<param name="salign" value="" />'
-		+ '<param name="allowScriptAccess" value="always" />'
+		+ '<param name="allowScriptAccess" value="sameDomain" />'
 		+ '<a href="http://www.adobe.com/go/getflash">'
 		+ '	<img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player" />'
 		+ '</a>'
@@ -237,34 +176,16 @@ elgg.avatar.capturePicture = function(ev) {
 	elgg.avatar.saveBase64Input(data, $(this).closest('form'));
 };
 
-/**
- * Save base64 data into a hidden input element
- *
- * @param {type} data
- * @param {type} formElement
- * @returns {undefined}
- */
 elgg.avatar.saveBase64Input = function(data, formElement) {
 	var html = "<input id='webcam-image-base64' type='hidden' name='webcam-image-base64'>";
 	$(formElement).prepend(html);
 	$('#webcam-image-base64').attr('value', data);
 };
 
-/**
- * Remove hidden element for base64 data.
- *
- * @returns {void}
- */
 elgg.avatar.removeBase64Input = function() {
 	$('#webcam-image-base64').remove();
-};
+}
 
-/**
- * Tabbed navigation
- *
- * @param {Event} ev
- * @returns {Void}
- */
 elgg.avatar.changeTab = function(ev) {
 	ev.preventDefault();
 	var $this = $(this);
@@ -280,12 +201,6 @@ elgg.avatar.changeTab = function(ev) {
 	$('#' + $li.attr('id').replace('-tab', '')).show();
 };
 
-/**
- * Check there is something to submit
- *
- * @param {Event} ev Event
- * @returns {Boolean}
- */
 elgg.avatar.submit = function(ev) {
 	// prevent if no data at all
 	if (!$('#webcam-image-base64').val()
@@ -295,8 +210,6 @@ elgg.avatar.submit = function(ev) {
 		elgg.register_error(elgg.echo('webcam:no_avatar_selected'));
 		ev.preventDefault();
 	}
-
-	return true;
 };
 
 elgg.register_hook_handler('init', 'system', elgg.avatar.init);

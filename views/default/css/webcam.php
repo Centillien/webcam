@@ -1,7 +1,7 @@
 #webcam-video {
 	border: 1px solid black;
-	width: 480px;
-	height: 360px;
+	width: 300px;
+	height: 225px;
 }
 
 #webcam-video.has-photo {
