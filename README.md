@@ -7,6 +7,7 @@ Install instructions:
 - Select your preference to control the users webcam
 - Go to edit avatar
 - Allow the plugin to use your webcam. 
+- Registration page will be extended with webcam upload
 
 Remark: The browser requests to allow use of the webcam.
 
