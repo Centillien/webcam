@@ -50,7 +50,10 @@ if ($html5) {
 	if ($_FILES['avatar']['error'] !== 0) {
 		register_error(elgg_echo('avatar:upload:fail'));
 		forward(REFERER);
-	}
+	} elseif(!in_array(strtolower(substr($_FILES['avatar']['name'], -3)), array('jpg','png','gif'))) {
+                                 register_error(elgg_echo('avatar:upload:fail'));
+                                 return $return;
+        }
 } else {
 	// nothing was submitted
 	register_error(elgg_echo('webcam:no_avatar_selected'));
