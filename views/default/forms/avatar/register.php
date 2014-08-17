@@ -36,7 +36,7 @@ echo "</div>";
 <div id="avatar-options">
 	<div id="avatar-upload" class="hidden">
 		<label><?php echo elgg_echo("avatar:upload"); ?></label><br />
-		<?php echo elgg_view("input/file", array("name"=>"profile_icon", "id" => "register-profile_icon"));
+		<?php echo elgg_view("input/file", array("name"=>"avatar"));
  ?>
 	</div>
 
@@ -47,10 +47,10 @@ echo "</div>";
                         <video id="webcam-video"></video>
                 </div>
         </div>
-
-
-        <div id="avatar-url" class="hidden">
-                <label><?php echo elgg_echo("webcam:url:info"); ?></label><br />
-                <?php echo elgg_view("input/text", array('name' => 'avatar_url')); ?>
-        </div>
 </div>
+<script type="text/javascript">
+        $(document).ready(function(){
+                $(".elgg-form-register").attr("enctype", "multipart/form-data").attr("encoding", "multipart/form-data");
+        });
+</script>
+
