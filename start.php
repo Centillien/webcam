@@ -18,9 +18,11 @@ function webcam_init() {
 	elgg_register_action('avatar/register', "$action_path/avatar/register.php");
 
 	//Incorporate webcam in registration form
-	elgg_extend_view('register/extend', 'forms/avatar/register' );
-	elgg_register_event_handler('create', 'user', 'webcam_registration_event');
-	
+	 if(elgg_get_plugin_setting("webcam_registration", "webcam") == "yes"){
+
+		elgg_extend_view('register/extend', 'forms/avatar/register' );
+		elgg_register_event_handler('create', 'user', 'webcam_registration_event');
+	}
 
 	//register js
 	$url = elgg_get_simplecache_url('js', 'webcam');

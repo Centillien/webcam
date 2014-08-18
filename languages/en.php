@@ -7,6 +7,7 @@ $english = array(
 	'webcam:capture' => "Or use your Webcam",
 	'webcam:saveerror' => "Properly encoded JPEG information not received from flash object.",
 	'webcam:webcam_input' => "Select below whether you want to use Adobe flash or html5 to be used to control the webcam",
+	'webcam:webcam_registration' => "Do you want to use the webcam during registration ?",
 	'profile:currentavatar' => "Current profile image",
 	
 	'webcam:tab:acquire' => 'Webcam',
@@ -24,6 +25,10 @@ $english = array(
 	'webcam:upload' => "Upload Image",
 	'webcam:capture' => "Or use your Webcam",
 	'profile:currentavatar' => "Current profile image",
+
+	'option:no' => "No",
+	'option:yes' => "Yes",
+
 );
 
 add_translation("en", $english);
