@@ -62,7 +62,7 @@ function webcam_registration_event($options) {
 			}
 	} else {
 		// nothing was submitted
-		register_error(elgg_echo("avatar:upload:fail"));
+		register_error(elgg_echo('Geen avatar ontvangen'));
 		return $return;
 	}
 

@@ -4,7 +4,7 @@
  * 
  * @uses $vars['entity']
  */
-elgg_load_js('webcam');
+elgg_load_js('webcam_profile');
 
 $selected_tab = get_input('tab', 'acquire');
 

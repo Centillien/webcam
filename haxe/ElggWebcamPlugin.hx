@@ -81,6 +81,7 @@ class Webcam {
 					byteArray = bitmapData.encode(new Rectangle(0, 0, cam.width, cam.height), new flash.display.JPEGEncoderOptions()); 
 					var base64 = Base64.encode(haxe.io.Bytes.ofData(byteArray));
 					ExternalInterface.call('elgg.avatar.saveBase64Input', base64, '.elgg-form-avatar-upload');
+					ExternalInterface.call('elgg.avatar.saveBase64Input', base64, '.elgg-form-register');
 				} else {
 					mc.removeChild(mc.getChildByName("snap"));
 					ExternalInterface.call('elgg.avatar.removeBase64Input');

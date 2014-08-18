@@ -27,5 +27,11 @@ function webcam_init() {
 	elgg_register_simplecache_view('js/webcam');
 	elgg_register_js('webcam', $url);
 
+	//js for profile, @todo make one js 
+        $url = elgg_get_simplecache_url('js', 'webcam_profile');
+        elgg_register_simplecache_view('js/webcam_profile');
+        elgg_register_js('webcam_profile', $url);
+
+
 	elgg_extend_view('css/elgg', 'css/webcam');
 }

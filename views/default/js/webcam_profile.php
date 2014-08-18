@@ -99,8 +99,8 @@ elgg.avatar.initFlash = function() {
 	var html = '<div id="flashContent">'
 		+ '<object type="application/x-shockwave-flash" data="' + elgg.get_site_url() 
 			// @todo make these dynamic
-			+ 'mod/webcam/haxe/take_picture.swf" width="480" height="360">'
-		+ '<param name="movie" value="take_picture.swf" />'
+			+ 'mod/webcam/haxe/take_picture_profile.swf" width="480" height="360">'
+		+ '<param name="movie" value="take_picture_profile.swf" />'
 		+ '<param name="quality" value="high" />'
 		+ '<param name="bgcolor" value="#ffffff" />'
 		+ '<param name="play" value="true" />'
