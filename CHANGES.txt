@@ -1,3 +1,7 @@
+Version 1.9.1 - Aug 19, 2014
+	* Added webcam to registration page (optional)
+	* Minor changes to support Elgg 1.9 framework
+
 Version 1.3 - March 21, 2014
 	* Combined repos to add HTML5 with Flash fallback.
 	* Rewrote Flash object using Haxe.
