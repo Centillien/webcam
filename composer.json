@@ -1,0 +1,14 @@
+{
+	"name": "centillien/webcam",
+	"description": "Adds webcam capture and entering URLs as options to change avatars.",
+	"type": "elgg-plugin",
+	"keywords": [
+		"elgg",
+		"plugin"
+	],
+	"license": "GPL-2.0",
+	"authors": [
+		{"name": "Gerard Kanters"},
+		{"name": "Brett Profitt"}
+	]
+}
