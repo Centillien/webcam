@@ -24,9 +24,9 @@ elgg.avatar.getMedia = (
 );
 
 elgg.avatar.init = function() {
-	$('.avatar-tabs a').live('click', elgg.avatar.changeTab);
-	$('.elgg-form-avatar-upload').live('submit', elgg.avatar.submit);
-	$('.elgg-form-register').live('submit', elgg.avatar.submit);
+	$(document).on('click', '.avatar-tabs a', elgg.avatar.changeTab);
+	$(document).on('submit', '.elgg-form-avatar-upload', elgg.avatar.submit);
+	$(document).on('submit', '.elgg-form-register', elgg.avatar.submit);
 
 	if (elgg.avatar.getMedia) {
 		elgg.avatar.initHtml5();
@@ -56,7 +56,7 @@ elgg.avatar.hasFlash = function() {
 }
 
 elgg.avatar.initHtml5 = function() {
-	$('#webcam-video').live('click', elgg.avatar.capturePicture);
+	$(document).on('click', '#webcam-video', elgg.avatar.capturePicture);
 
 	// must be called in the context of navigator or window, depending on browser
 	elgg.avatar.getMedia.call(navigator || window,
@@ -97,7 +97,7 @@ elgg.avatar.shutterSound = function() {
 
 elgg.avatar.initFlash = function() {
 	var html = '<div id="flashContent">'
-		+ '<object type="application/x-shockwave-flash" data="' + elgg.get_site_url() 
+		+ '<object type="application/x-shockwave-flash" data="' + elgg.get_site_url()
 			// @todo make these dynamic
 			+ 'mod/webcam/haxe/take_picture.swf" width="480" height="360">'
 		+ '<param name="movie" value="take_picture.swf" />'
@@ -141,7 +141,7 @@ elgg.avatar.setRes = function(ev) {
 
 /**
  * Capture a picture and save as base64 input data
- * 
+ *
  * @param Obj ev Event
  * @returns {undefined}
  */
@@ -164,7 +164,7 @@ elgg.avatar.capturePicture = function(ev) {
 
 	var width = elgg.avatar.options.width,
 		height = elgg.avatar.options.height;
-	
+
 	elgg.avatar.shutterSound().play();
 	video.pause();
 	$(video).addClass('has-photo');
@@ -196,7 +196,7 @@ elgg.avatar.changeTab = function(ev) {
 	// change tab
 	$ul.find('li').removeClass('elgg-state-selected');
 	$li.addClass('elgg-state-selected');
-	
+
 	// change content
 	$("#avatar-options > div").hide();
 	$('#' + $li.attr('id').replace('-tab', '')).show();
