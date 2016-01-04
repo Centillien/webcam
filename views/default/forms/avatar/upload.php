@@ -1,10 +1,10 @@
 <?php
 /**
  * Avatar upload form
- * 
+ *
  * @uses $vars['entity']
  */
-elgg_load_js('webcam_profile');
+elgg_load_js('webcam');
 
 $selected_tab = get_input('tab', 'acquire');
 
