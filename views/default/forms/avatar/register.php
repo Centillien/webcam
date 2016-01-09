@@ -1,10 +1,10 @@
 <?php
 /**
  * Avatar upload form
- * 
+ *
  * @uses $vars['entity']
  */
-elgg_load_js('webcam');
+elgg_require_js('webcam');
 
 $tabs = array('acquire', 'upload');
 $selected_tab = get_input('tab', 'acquire');
@@ -27,7 +27,7 @@ $tab_nav = elgg_view('navigation/tabs', $options);
 
 echo "<div class='mandatory'>";
 echo "<br><label for='avatar'>";
-echo elgg_echo('avatar'); 
+echo elgg_echo('avatar');
 echo "</label><br><br>";
 echo $tab_nav;
 echo "</div>";
@@ -48,9 +48,3 @@ echo "</div>";
                 </div>
         </div>
 </div>
-<script type="text/javascript">
-        $(document).ready(function(){
-                $(".elgg-form-register").attr("enctype", "multipart/form-data").attr("encoding", "multipart/form-data");
-        });
-</script>
-
