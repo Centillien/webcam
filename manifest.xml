@@ -2,7 +2,7 @@
 <plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
 	<name>Webcam</name>
 	<author>Gerard Kanters and Brett Profitt</author>
-	<version>1.9.1</version>
+	<version>2.0.1</version>
 	<category>tools</category>
 	<description>
 		Adds webcam capture and entering URLs as options to change avatars.
