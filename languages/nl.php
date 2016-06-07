@@ -13,7 +13,7 @@ $dutch = array(
 	'webcam:acquire:info' => 'Klik op de video om een snapshot te maken, daarna klik op opslaan om deze op te slaan.',
         'webcam:acquire:register:info' => 'Klik op de video om een foto te maken en voltooi de registratie .',
 
-	'webcam:tab:upload' => 'Opslaan',
+	'webcam:tab:upload' => 'Bestand',
 
 	'webcam:tab:url' => 'URL',
 	'webcam:url:info' => 'Geef een URL in waar het image zich bevind',
