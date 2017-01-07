@@ -10,7 +10,7 @@ $dutch = array(
 	'profile:currentavatar' => "Huidige profiel image",
 	
 	'webcam:tab:acquire' => 'Webcam',
-	'webcam:acquire:info' => 'Klik op de video om een snapshot te maken, daarna klik op opslaan om deze op te slaan.',
+	'webcam:acquire:info' => 'Klik op de video om een snapshot te maken, daarna klik onderaan de pagina op maak je profiel foto.',
         'webcam:acquire:register:info' => 'Klik op de video om een foto te maken en voltooi de registratie .',
 
 	'webcam:tab:upload' => 'Bestand',

@@ -11,7 +11,7 @@ $english = array(
 	'profile:currentavatar' => "Current profile image",
 	
 	'webcam:tab:acquire' => 'Webcam',
-	'webcam:acquire:info' => 'Click the video to take a picture, and click Upload to save.',
+	'webcam:acquire:info' => 'Click the video to take a picture, and create profile photo on the bottom of the page.',
 	'webcam:acquire:register:info' => 'Click the video to take a picture and finish registration.',
 
 	'webcam:tab:upload' => 'Upload',
