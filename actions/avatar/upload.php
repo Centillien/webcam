@@ -40,7 +40,7 @@ if (!$owner || !($owner instanceof ElggUser) || !$owner->canEdit()) {
 
 $error = elgg_get_friendly_upload_error($_FILES['avatar']['error']);
 if ($error) {
-        register_error($error);
+        //register_error($error);
         forward(REFERER);
 }
 
