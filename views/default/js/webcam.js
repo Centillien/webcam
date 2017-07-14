@@ -28,6 +28,8 @@ define(function(require) {
 		$(document).on('click', '.avatar-tabs a', changeTab);
 		$(document).on('submit', '.elgg-form-avatar-upload', submit);
 		$(document).on('submit', '.elgg-form-register', submit);
+		$('.imgareaselect-outer').css('top','950px');
+		$('.myvox-foot').css('margin-bottom', '400px');
 
 		if (getMedia) {
 			initHtml5();
@@ -197,11 +199,12 @@ define(function(require) {
 		// change tab
 		$ul.find('li').removeClass('elgg-state-selected');
 		$li.addClass('elgg-state-selected');
-		if($("#avatar-acquire-tab").hasClass('elgg-state-selected')) {
-			$('.imgareaselect-outer').css('top', '920px');
+		if($("#avatar-acquire-tab").hasClass('myvox-state-selected')) {
+			$('.myvox-foot').css('margin-bottom', '50px');
 		}else{
-			$('.imgareaselect-outer').css('top', '590px');
+			$('.myvox-foot').css('margin-bottom', '400px');
 		}
+
 
 		// change content
 		$("#avatar-options > div").hide();
