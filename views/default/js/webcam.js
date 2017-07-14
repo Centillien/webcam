@@ -197,6 +197,11 @@ define(function(require) {
 		// change tab
 		$ul.find('li').removeClass('elgg-state-selected');
 		$li.addClass('elgg-state-selected');
+		if($("#avatar-acquire-tab").hasClass('elgg-state-selected')) {
+			$('.imgareaselect-outer').css('top', '920px');
+		}else{
+			$('.imgareaselect-outer').css('top', '590px');
+		}
 
 		// change content
 		$("#avatar-options > div").hide();

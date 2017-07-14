@@ -6,7 +6,7 @@
  */
 elgg_require_js('webcam');
 
-$selected_tab = get_input('tab', 'acquire');
+//$selected_tab = get_input('tab', 'acquire');
 
 $options = array(
 	'tabs' => array(),
@@ -29,12 +29,12 @@ echo $tab_nav;
 ?>
 
 <div id="avatar-options">
-	<div id="avatar-upload" class="hidden">
+	<div id="avatar-upload">
 		<label><?php echo elgg_echo("avatar:upload"); ?></label><br />
 		<?php echo elgg_view("input/file", array('name' => 'avatar')); ?>
 	</div>
 
-	<div id="avatar-acquire">
+	<div id="avatar-acquire" class="hidden">
 		<label><?php echo elgg_echo("webcam:acquire:info"); ?></label><br />
 		<div id="webcam">
 			<canvas id="webcam-canvas" class="hidden"></canvas>
