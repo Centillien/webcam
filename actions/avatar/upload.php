@@ -23,7 +23,7 @@ if ($html5) {
 if ($img_data) {
         $filehandler = new ElggFile();
         $filehandler->owner_guid = $owner->getGUID();
-        $filehandler->setFilename("profile/" . $owner->guid . "master.jpg");
+        $filehandler->setFilename("profile/" . $owner->guid . "master.png");
         $filehandler->open("write");
         if (!$filehandler->write($img_data)) {
                 register_error(elgg_echo("avatar:upload:fail"));
@@ -39,15 +39,16 @@ if (!$owner || !($owner instanceof ElggUser) || !$owner->canEdit()) {
 }
 
 $error = elgg_get_friendly_upload_error($_FILES['avatar']['error']);
-if ($error) {
-        //register_error($error);
+if ($error && !$img_data) {
+        register_error($error);
         forward(REFERER);
 }
 
-if (!$owner->saveIconFromUploadedFile('avatar')) {
-        register_error(elgg_echo('avatar:resize:fail'));
+if (!$owner->saveIconFromElggFile($filehandler)) {
+        register_error(myvox_echo('avatar:resize:fail'));
         forward(REFERER);
 }
+
 
 if (elgg_trigger_event('profileiconupdate', $owner->type, $owner)) {
         system_message(elgg_echo("avatar:upload:success"));
